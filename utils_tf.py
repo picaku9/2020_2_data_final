@@ -234,6 +234,7 @@ def model_eval(sess, x, y, predictions, X_test=None, Y_test=None,
     # Compute number of batches
     nb_batches = int(math.ceil(float(len(X_test)) / args.batch_size))
     assert nb_batches * args.batch_size >= len(X_test)
+    assert len(X_test) == 0
 
     X_cur = np.zeros((args.batch_size,) + X_test.shape[1:],
                      dtype=X_test.dtype)
@@ -262,6 +263,7 @@ def model_eval(sess, x, y, predictions, X_test=None, Y_test=None,
       accuracy += cur_corr_preds[:cur_batch_size].sum()
 
     # Divide by number of examples to get final value
+    assert len(X_test) == 0
     accuracy /= len(X_test)
 
   return accuracy
