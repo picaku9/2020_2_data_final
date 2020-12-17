@@ -229,9 +229,10 @@ def model_eval(sess, x, y, predictions, X_test=None, Y_test=None,
 
   # Init result var
   accuracy = 0.0
-
+  import pdb;pdb.set_trace()
   with sess.as_default():
     # Compute number of batches
+
     nb_batches = int(math.ceil(float(len(X_test)) / args.batch_size))
     assert nb_batches * args.batch_size >= len(X_test)
     assert len(X_test) == 0
