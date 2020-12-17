@@ -4,7 +4,7 @@ import json
 import random
 from collections import defaultdict
 import numpy as np
-from sklearn import svm, cross_validation
+from sklearn import svm, model_selection
 from scipy.sparse import csc_matrix
 
 
@@ -81,7 +81,7 @@ def train():
   features, labels, featDict, appHashes = readData(sample = True)
   print ("done reading")
   clf = svm.SVC(kernel='linear', C=1)
-  scores = cross_validation.cross_val_score(clf, features, labels, cv=5)
+  scores = model_selection.cross_val_score(clf, features, labels, cv=5)
   print (scores)
 
 if __name__ == 'main':

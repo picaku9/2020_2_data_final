@@ -12,7 +12,7 @@ import tensorflow as tf
 from cleverhans.loss import LossCrossEntropy
 from cleverhans.utils_mnist import data_mnist
 from cleverhans.utils_tf import train, model_eval, model_argmax
-from cleverhans_tutorials.tutorial_models import ModelBasicCNN
+from cleverhans.model_zoo.basic_cnn import ModelBasicCNN
 
 
 def one_hot_encoder(ys, nb_classes):

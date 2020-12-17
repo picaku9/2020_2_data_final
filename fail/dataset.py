@@ -6,7 +6,7 @@ import os
 import json
 import copy
 import numpy as np
-from sklearn.cross_validation import StratifiedShuffleSplit
+from sklearn.model_selection import StratifiedShuffleSplit
 
 
 class Data:
