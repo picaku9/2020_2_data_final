@@ -67,7 +67,7 @@ if __name__ == '__main__':
         #with testbed() as tb:
         tb = testbed()
         x_train, y_train, x_test, y_test = data_mnist()
-        sess = tf.Session()
+        sess = tf.InteractiveSession()
 
         victim = CNNModel('victim')
         surrogate = CNNModel('surrogate')
