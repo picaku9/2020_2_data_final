@@ -229,7 +229,6 @@ def model_eval(sess, x, y, predictions, X_test=None, Y_test=None,
 
   # Init result var
   accuracy = 0.0
-  import pdb;pdb.set_trace()
   with sess.as_default():
     # Compute number of batches
 
