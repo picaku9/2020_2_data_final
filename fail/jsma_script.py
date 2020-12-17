@@ -38,7 +38,7 @@ class CNNModel:
             # Define input TF placeholder
             self.x = tf.placeholder(tf.float32, shape=(None, 28, 28, 1))
             self.y = tf.placeholder(tf.float32, shape=(None, 10))
-            self.model = ModelBasicCNN('model1', 10, 64)
+            self.model = ModelBasicCNN(self.scope, 10, 64)
             self.preds = self.model.get_logits(self.x)
             self.loss = LossCrossEntropy(self.model, smoothing=0.1)
 
