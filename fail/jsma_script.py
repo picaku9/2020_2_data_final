@@ -3,7 +3,7 @@ import os
 import sys
 
 from testbed import testbed
-from examples.jsma_experiments import JSMAUnconstrainedExperiment
+from jsma_experiments import JSMAUnconstrainedExperiment
 from cleverhans.utils_mnist import data_mnist
 from cleverhans.utils_tf import model_eval, model_argmax, model_train
 from dataset import Dataset
