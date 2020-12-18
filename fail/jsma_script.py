@@ -77,8 +77,9 @@ if __name__ == '__main__':
         tb.register_victim(victim)
         tb.register_surrogate(surrogate)
 
-        e1 = JSMAUnconstrainedExperiment(['some_label'])
+        e1 = JSMAUnconstrainedExperiment(['jsma_label'])
         # e2 = JSMALimitedFeatureKnowledgeExperiment(border=4)
-        tb.register_experiment(e1)
+        #e1 =  StingRayUnconstrainedExperiment(['some_label'])
+        #tb.register_experiment(e1)
 
         tb.run_experiments(runs=2, out_dir=os.path.join('output', 'jsma-FAIL'))

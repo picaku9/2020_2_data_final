@@ -67,20 +67,20 @@ class CNNModel:
 if __name__ == '__main__':
         #with testbed() as tb:
         tb = testbed()
-        x_train, y_train, x_test, y_test = data_mnist()
-        sess = tf.InteractiveSession()
+        with tb:
+          x_train, y_train, x_test, y_test = data_mnist()
+          sess = tf.InteractiveSession()
 
-        victim = CNNModel('victim')
-        surrogate = CNNModel('surrogate')
+          victim = CNNModel('victim')
+          surrogate = CNNModel('surrogate')
 
-        mnist = Dataset(np.append(x_train, x_test, axis=0), np.append(y_train, y_test, axis=0), train_pct=0.1)
-        tb.register_dataset(mnist)
-        tb.register_victim(victim)
-        tb.register_surrogate(surrogate)
+          mnist = Dataset(np.append(x_train, x_test, axis=0), np.append(y_train, y_test, axis=0), train_pct=0.1)
+          tb.register_dataset(mnist)
+          tb.register_victim(victim)
+          tb.register_surrogate(surrogate)
 
-        #e1 = JSMAUnconstrainedExperiment(['some_label'])
-        # e2 = JSMALimitedFeatureKnowledgeExperiment(border=4)
-        e1 =  StingRayUnconstrainedExperiment(['some_label'])
-        tb.register_experiment(e1)
-
-        tb.run_experiments(runs=2, out_dir=os.path.join('output', 'jsma-FAIL'))
+          #e1 = JSMAUnconstrainedExperiment(['some_label'])
+          #e2 = JSMALimitedFeatureKnowledgeExperiment(border=4)
+          e1 =  StingRayUnconstrainedExperiment(['stingray_label'])
+          tb.register_experiment(e1)
+          tb.run_experiments(runs=1, out_dir=os.path.join('output', 'jsma-FAIL'))

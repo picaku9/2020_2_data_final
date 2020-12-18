@@ -4,11 +4,11 @@ import sys
 import copy
 
 from testbed import testbed
-from examples.stingray_experiments import StingRayUnconstrainedExperiment
+from stingray_experiments import StingRayUnconstrainedExperiment
 from dataset import DrebinDataset
 
 ### DREBIN configs
-DATA_DIR = '/Users/osuciu/Documents/datasets/drebin'
+DATA_DIR = 'E:/study/20-2학기/데과특/발표/git-repo/2020_2_data_final'
 SAMPLING_SEED = 12552
 TRAINING_SET_SIZE = -1
 NO_OF_FEATURES = 500
