@@ -1,5 +1,6 @@
 from testbed import testbed
 from lib import Drebin
+from lib import Mmclassifier
 #
 import sys
 import os
@@ -51,6 +52,64 @@ class DrebinDataset:
         Drebin.DATA_DIR = data_dir
 
         features, labels, featDict, appHashes = Drebin.readData(sample=sample, seed=seed)
+
+        print ('Done read')
+    
+        total_no_samples = labels.shape[0]
+
+        if training_size is -1:
+            training_size = (int) (0.66 * total_no_samples)
+
+        sss = StratifiedShuffleSplit(labels, 1, train_size=training_size,test_size=total_no_samples-training_size, random_state=seed)
+        train, test = list(sss)[0]
+
+        train_features, test_features = features[train], features[test]
+        train_labels, test_labels = labels[train], labels[test]
+        train_hashes, test_hashes = appHashes[train], appHashes[test]
+
+        print ('Done split')
+
+        if reduce_features:
+            train_features,test_features,selected_features_indices = _feature_selection(train_features, train_labels, test_features, no_of_features)
+            selected_features = filter(lambda e: e[1] in selected_features_indices, featDict.items())
+            selected_features = sorted(selected_features,key=lambda e: e[1])
+            selected_features = map(lambda e: e[0],selected_features)
+        else:
+            selected_features = map(lambda e: e[0],sorted(featDict.items(),key=lambda e: e[1]))
+
+
+        print ('Done FS')
+
+        train_features = train_features
+        train_labels = train_labels
+        test_features = test_features
+        test_labels = test_labels
+
+
+        self.selected_features = selected_features
+        self.train_hashes = train_hashes
+        self.test_hashes = test_hashes
+    
+        self.data_train = Data(train_features, train_labels)
+        self.data_test = Data(test_features, test_labels)
+        self.data_craft = Data(test_features, test_labels)
+
+
+    def train(self):
+        return self.data_train
+
+    def test(self):
+        return self.data_test
+
+    def craft(self):
+        return self.data_craft
+
+
+class MmclassifierDataset:
+    def __init__(self, data_dir, training_size=-1, reduce_features=False, no_of_features=500, seed=1234, sample=True):
+        Mmclassifier.DATA_DIR = data_dir
+
+        features, labels, featDict, appHashes = Mmclassifier.readData(sample=sample, seed=seed)
 
         print ('Done read')
     
